@@ -1,0 +1,21 @@
+schema {
+    query: Query
+    mutation: Mutation
+}
+
+type Ticket {
+    id: ID!
+    title: String!
+    description: String
+}
+
+type Query {
+    getTicketList: [Ticket]
+    getTicketDetails(id: ID!): Ticket!
+}
+
+type Mutation {
+    createTicket(title: String!, description: String): Ticket!
+    updateTicket(id: ID!, title: String!, description: String): Ticket!
+    deleteTicket(id: ID!): String
+}
