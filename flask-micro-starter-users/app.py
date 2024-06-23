@@ -10,21 +10,21 @@ from ariadne import (
 )
 from ariadne.explorer import ExplorerPlayground
 from resolvers import (
-    get_tickets_list_resolver,
-    get_tickets_details_resolver,
-    create_ticket_resolver,
-    update_ticket_resolver,
-    delete_ticket_resolver
+    get_user_list_resolver,
+    get_user_details_resolver,
+    create_user_resolver,
+    update_user_resolver,
+    delete_user_resolver
 )
 
 graphql_query = QueryType()
 graphql_mutation = MutationType()
 
-graphql_query.set_field('getTicketList', get_tickets_list_resolver)
-graphql_query.set_field('getTicketDetails', get_tickets_details_resolver)
-graphql_mutation.set_field('createTicket', create_ticket_resolver)
-graphql_mutation.set_field('updateTicket', update_ticket_resolver)
-graphql_mutation.set_field('deleteTicket', delete_ticket_resolver)
+graphql_query.set_field('getUserList', get_user_list_resolver)
+graphql_query.set_field('getUserDetails', get_user_details_resolver)
+graphql_mutation.set_field('createUser', create_user_resolver)
+graphql_mutation.set_field('updateUser', update_user_resolver)
+graphql_mutation.set_field('deleteUser', delete_user_resolver)
 
 graphql_type_defs = load_schema_from_path('schema.graphql')
 graphql_explorer = ExplorerPlayground().html(None)
@@ -50,11 +50,6 @@ def graphql_playground():
 @app.route('/graphql', methods = ['POST'])
 def graphql_server():
     data = request.get_json()
-    success, result = graphql_sync(
-        graphql_schema,
-        data,
-        context_value = request,
-        debug = app.debug
-    )
+    success, result = graphql_sync(graphql_schema, data, context_value = request, debug = app.debug)
     status_code = 200 if success else 400
     return jsonify(result), status_code

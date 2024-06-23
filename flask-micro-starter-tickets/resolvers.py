@@ -17,4 +17,4 @@ def update_ticket_resolver(obj, info, id, title, description):
 
 @convert_kwargs_to_snake_case
 def delete_ticket_resolver(obj, info, id):
-    return 'Ticket will deleted'
+    return f'Ticket {id} will deleted'
