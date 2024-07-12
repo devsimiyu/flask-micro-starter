@@ -11,3 +11,7 @@ docs/_build/
 
 # firebase
 *-debug.log
+
+# Environment
+.env.local
+.env
